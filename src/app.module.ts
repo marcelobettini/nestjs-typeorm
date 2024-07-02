@@ -4,8 +4,6 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
-import { APP_FILTER } from '@nestjs/core';
-import { AllExceptionsFilter } from './all-exceptions/all-exceptions.filter';
 
 @Module({
   imports: [
@@ -17,16 +15,11 @@ import { AllExceptionsFilter } from './all-exceptions/all-exceptions.filter';
       username: 'root',
       password: 'root',
       database: 'nest_mysql_typeorm_DB',
+      // synchronize: true,
       entities: [User],
     }),
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_FILTER,
-      useClass: AllExceptionsFilter,
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {}
