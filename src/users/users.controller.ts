@@ -7,10 +7,12 @@ import {
   Param,
   Delete,
   HttpCode,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateProfileDto } from './dto/create-profile.dto';
 
 @Controller('api/v1/users')
 export class UsersController {
@@ -39,5 +41,12 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
+  }
+  @Post(':id/profile')
+  createProfile(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() profile: CreateProfileDto,
+  ) {
+    return this.usersService.createProfile(id, profile);
   }
 }

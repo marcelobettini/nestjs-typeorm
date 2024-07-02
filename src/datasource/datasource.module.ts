@@ -18,7 +18,7 @@ import { Global, Module } from '@nestjs/common';
             username: 'root',
             password: 'root',
             database: 'nest_mysql_typeorm_DB',
-            synchronize: false,
+            // synchronize: true,
             entities: [`${__dirname}/../**/**.entity{.ts,.js}`], // this will automatically load all entity file in the src folder
           });
           await dataSource.initialize(); // initialize the data source
